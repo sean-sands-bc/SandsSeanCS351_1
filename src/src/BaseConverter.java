@@ -1,5 +1,6 @@
 package src;
 
+import java.awt.Color;
 import java.nio.ByteBuffer;
 
 public class BaseConverter {
@@ -8,7 +9,8 @@ public class BaseConverter {
 		// TODO Auto-generated method stub
 		BCGUI bcg = new BCGUI();
 		
-		System.out.println(Float.intBitsToFloat(0b111111000000000000000000000000));
+		Color c = Color.black;
+		System.out.println(c.toString());
 		
 	}
 

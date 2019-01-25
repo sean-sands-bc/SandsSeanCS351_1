@@ -397,15 +397,20 @@ public class BCGUI {
 		octFld.setText(Integer.toOctalString(i));
 		hexFld.setText(Integer.toHexString(i));
 		*/
-		decFld.setText(bcb.getInt(10));
-		binFld.setText(bcb.getInt(2));
-		octFld.setText(bcb.getInt(8));
-		hexFld.setText(bcb.getInt(16));
 		
-		chaFld.setText(bcb.getString());
+		decFld.setText(bcb.getVal(ActiveField.DEC));
+		binFld.setText(bcb.getVal(ActiveField.BIN));
+		octFld.setText(bcb.getVal(ActiveField.OCT));
+		hexFld.setText(bcb.getVal(ActiveField.HEX));
+		
+		fltFld.setText(bcb.getVal(ActiveField.FLT));
+		
+		chaFld.setText(bcb.getVal(ActiveField.CHA));
+		
+		colFld.setBackground(bcb.getCol());
 		colFld.setVisible(true);
-		colFld.setBackground(bcb.getColor());
-		fltFld.setText(Float.toString(bcb.getFloat()));	//	needs update
+		
+		
 	}
 	
 	public void clrFields()
@@ -419,7 +424,7 @@ public class BCGUI {
 		colFld.setBackground(new Color(0));
 		fltFld.setText("");
 		af = ActiveField.NON;
-		bcb.setVal(0);
+		bcb.clrVal();
 	}
 	
 	public void setVal()
@@ -431,7 +436,8 @@ public class BCGUI {
 			bcb.setVal(binFld.getText(), af);
 			break;
 		case CHA:
-			bcb.setVal(chaFld.getText());
+			//bcb.setVal(chaFld.getText());
+			bcb.setVal(chaFld.getText(), af);
 			break;
 		case COL:
 			bcb.setVal(colFld.getBackground());
