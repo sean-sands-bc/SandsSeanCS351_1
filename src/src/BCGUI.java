@@ -18,26 +18,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class BCGUI {
+	// main window
 	private JFrame frm;
 	
+	//	backend for converting values from and to strings
 	private BCBackend bcb;
-	/*
-	private JPanel pnl;
 	
-	private JColorChooser colCho;
-	
-	private JLabel decLab;
-	private JLabel binLab;
-	private JLabel octLab;
-	private JLabel hexLab;
-	private JLabel chaLab;
-	private JLabel colLab;
-	private JLabel floLab;
-	*/
+	//	enum for field to convert from
 	public static enum ActiveField{DEC,BIN,OCT,HEX,CHA,COL,FLT,NON}
 	
+	//	default to none
 	private ActiveField af = ActiveField.NON;
 	
+	//	text fields, color field
 	private JTextField decFld;
 	private JTextField binFld;
 	private JTextField octFld;
@@ -46,6 +39,7 @@ public class BCGUI {
 	private JLabel colFld;
 	private JTextField fltFld;
 	
+	//	color choosing, convert, clear buttons
 	private JButton colBtn;
 	private JButton cvtBtn;
 	private JButton clrBtn;
@@ -53,23 +47,23 @@ public class BCGUI {
 	
 	public BCGUI()
 	{
-		bcb = new BCBackend();
-		frm = new JFrame("Number Converter");
+		bcb = new BCBackend();	//	initialize backend
+		frm = new JFrame("Number Converter");	//	initialize main window
 		
-		JPanel pnl = new JPanel();
-		pnl.setLayout(new GridBagLayout());
+		JPanel pnl = new JPanel();	//	initialize main panel
+		pnl.setLayout(new GridBagLayout());	//	set layout to gridbag
 		
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c = new GridBagConstraints();	//	changing constraints for components
 		
 		//JLabel lbl;
 		//JTextField fld;
 		//JButton btn;
 		
-		addLabels(pnl);		
+		addLabels(pnl);		//	add passive labels to pnl
 		
 		c.weighty = 0.0;	//	resetting vertical weight so only determined by label row
 		
-		//	ADD TEXT FIELDS
+		//	ADD TEXT FIELDS, give focuslisteners for changing activeField
 		
 		//	Decimal Field
 		decFld = new JTextField();
@@ -79,7 +73,7 @@ public class BCGUI {
 					@Override
 					public void focusGained(FocusEvent arg0) {
 						// TODO Auto-generated method stub
-						af = ActiveField.DEC;
+						af = ActiveField.DEC;	//	change active field on focus gain
 					}
 
 					@Override
@@ -228,7 +222,7 @@ public class BCGUI {
 		cvtBtn.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)	//	chanage backend value and fill fields when clicked
 			{
 				setVal();
 				setFields();
@@ -244,7 +238,7 @@ public class BCGUI {
 		clrBtn.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e) 	//	clear fields when clicked
 			{
 				clrFields();
 			}
@@ -266,28 +260,29 @@ public class BCGUI {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					Color newCol = JColorChooser.showDialog(new JFrame(), "Choose Background Color", Color.BLACK);
+					Color newCol = JColorChooser.showDialog(new JFrame(), "Choose Background Color", Color.BLACK);	//	open color chooser when clicked, return chosen color when 'OK'
 					if (newCol == null)
 					{
 						return;
 					}
-					af = ActiveField.COL;
-					colFld.setBackground(newCol);
-					setVal();
+					af = ActiveField.COL;	//	change activefield to clor
+					colFld.setBackground(newCol);	//	change background color of color field
+					setVal();	//	set backend val by background color
 					setFields();
 				}
 		
 			}
 			);
 		
-		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//	close program on exit frame
 		
-		frm.add(pnl);
-		frm.setPreferredSize(new Dimension(500, 500));
-		frm.pack();
-		frm.setVisible(true);
+		frm.add(pnl);	//	add panel to frame
+		frm.setPreferredSize(new Dimension(500, 500));	//	preferred frame size
+		frm.pack();	//	pack frame
+		frm.setVisible(true);	//	show frame
 	}
 	
+	//	add passive labels to a panel
 	private void addLabels(JPanel pnl)
 	{
 		JLabel lbl;
@@ -387,6 +382,7 @@ public class BCGUI {
 		c.weighty = 0.0;	//	resetting vertical weight so only determined by label row
 	}
 
+	//	set textfields based on backend value
 	public void setFields()
 	{
 		if (af == ActiveField.NON) { return; }
@@ -408,7 +404,7 @@ public class BCGUI {
 		chaFld.setText(bcb.getVal(ActiveField.CHA));
 		
 		colFld.setBackground(bcb.getCol());
-		colFld.setVisible(true);
+		colFld.setVisible(true);	//	show color field
 		
 		
 	}
@@ -420,13 +416,14 @@ public class BCGUI {
 		octFld.setText("");
 		hexFld.setText("");
 		chaFld.setText("");
-		colFld.setVisible(false);
+		colFld.setVisible(false);	//	hide color field
 		colFld.setBackground(new Color(0));
 		fltFld.setText("");
 		af = ActiveField.NON;
 		bcb.clrVal();
 	}
 	
+	//	set backend value based on a field
 	public void setVal()
 	{
 		switch(af)

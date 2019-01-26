@@ -9,6 +9,7 @@ public class BCBackend
 	
 	public BCBackend() {}
 	
+	//	change val from a string, based on field
 	public void setVal(String s, BCGUI.ActiveField af)
 	{
 		switch(af)
@@ -41,11 +42,13 @@ public class BCBackend
 		}
 	}
 	
+	// set val to 0
 	public void clrVal()
 	{
 		val = 0;
 	}
 	
+	//	set val, treating s as a string representation of a signed integer of base/radix r
 	private void setInt(String s, int r)
 	{
 		boolean neg = false;
@@ -87,6 +90,7 @@ public class BCBackend
 		//System.out.println(val);
 	}
 	
+	//	set val, treating s as a string representation of a float
 	private void setFlt(String s)
 	{
 		boolean neg = false;
@@ -99,16 +103,18 @@ public class BCBackend
 		{
 			
 		}
-		f = Float.parseFloat(s);	//	needs to be replaced
+		f = Float.parseFloat(s);	//	needs to be replaced?
 		val = fltToInt(f);
 	}
 	
+	//	convert float into a bit-equivalent integer
 	private int fltToInt(float f)
 	{
-		int fti = Float.floatToRawIntBits(f);	//	needs to be replaced
+		int fti = Float.floatToRawIntBits(f);	//	needs to be replaced?
 		return fti;
 	}
 	
+	//	set val, treating s as a string of characters
 	private void setCha(String s)
 	{
 		int newVal = 0;
@@ -126,6 +132,7 @@ public class BCBackend
 		//System.out.println("setCha "+Integer.toHexString(val));	//	debugging console
 	}
 	
+	//	return a string, based on val, and the Activefield
 	public String getVal(BCGUI.ActiveField af)
 	{
 		switch(af)
@@ -164,7 +171,7 @@ public class BCBackend
 		
 	}
 	
-	
+	//	return a signed integer string of base r
 	private String getInt(int r)
 	{
 		if (val == 0) { return "0"; }
@@ -192,6 +199,7 @@ public class BCBackend
 		return is;
 	}
 	
+	//	return an unsigned binary integer string
 	private String getBin()
 	{
 		String bs = "";
@@ -208,6 +216,7 @@ public class BCBackend
 		return bs;
 	}
 	
+	//	return an unsigned octal integer string
 	private String getOct()
 	{
 		String os = "";
@@ -223,6 +232,7 @@ public class BCBackend
 		return os;
 	}
 	
+	//	return an unsigned hexadecimal integer string
 	private String getHex()
 	{
 		String hs = "";
@@ -246,11 +256,13 @@ public class BCBackend
 		return hs;
 	}
 	
+	//	return a float string
 	private String getFlt()
 	{
-		return Float.toString(Float.intBitsToFloat(val));	//	needs to be replaced
+		return Float.toString(Float.intBitsToFloat(val));	//	needs to be replaced?
 	}
 	
+	//	return a character array string
 	private String getCha()
 	{
 		int tempVal = val;
@@ -265,6 +277,7 @@ public class BCBackend
 		return t;
 	}
 	
+	//	set val based on a clor
 	public void setVal(Color c)
 	{
 		val = 0;
@@ -279,6 +292,7 @@ public class BCBackend
 		//val = c.getRGB();
 	}
 	
+	//	return a color based on val
 	public Color getCol()
 	{
 		
@@ -286,6 +300,8 @@ public class BCBackend
 	}
 
 }
+
+//	previous version code
 /*
 public class BCBackend {
 	

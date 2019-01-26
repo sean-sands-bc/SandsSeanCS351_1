@@ -7,10 +7,9 @@ public class BaseConverter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		BCGUI bcg = new BCGUI();
+		BCGUI bcg = new BCGUI();	//	construct a BCGUI
 		
-		Color c = Color.black;
-		System.out.println(c.toString());
+		
 		
 	}
 
